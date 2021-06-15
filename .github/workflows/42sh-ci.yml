@@ -1,0 +1,20 @@
+name: 42sh - CI
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+
+      - uses: actions/checkout@v1
+      - name: Loading tests
+        run:  sudo apt update && sudo apt install build-essential
+
+      - name: Test 1 -> build project
+        run:  make
+      - name: Test 2 -> check binary
+        run:  echo "ls -la" | ./42sh
